@@ -1,6 +1,7 @@
-import { Fingerprint, Type, LucideIcon } from 'lucide-react';
+import { Fingerprint, Type, LucideIcon, FileStack } from 'lucide-react';
 import { UUIDGeneratorTool } from '@/modules/uuid/UUIDGeneratorTool';
 import { TextAnalyzerTool } from '@/modules/text/TextAnalyzerTool';
+import { PDFMergerTool } from '@/modules/pdf/PDFMergerTool';
 
 export interface Tool {
   id: string;
@@ -24,5 +25,12 @@ export const TOOLS_REGISTRY: Tool[] = [
     description: 'Converta texto para slug e obtenha estatísticas.',
     icon: Type,
     component: TextAnalyzerTool
+  },
+  {
+    id: 'pdf-merger',
+    name: 'PDF Merger',
+    description: 'Junte múltiplos ficheiros PDF num só localmente, sem enviar para servidores.',
+    icon: FileStack,
+    component: PDFMergerTool
   }
 ];
