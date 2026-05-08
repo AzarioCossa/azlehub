@@ -79,6 +79,8 @@ export const translations = {
     hash_placeholder: 'Insira o texto para gerar o hash...',
     hash_uppercase: 'Saída em Maiúsculas',
     hash_calc_btn: 'Calcular Hashes',
+    hash_input_label: 'Conteúdo para Hash',
+    hash_copy_success: 'Hash copiado!',
 
     // --- CONTEÚDO INTERNO: URL Parser ---
     url_placeholder: 'Cole o URL completo aqui (ex: https://...)',
@@ -226,6 +228,8 @@ export const translations = {
     hash_placeholder: 'Enter text to generate hash...',
     hash_uppercase: 'Uppercase Output',
     hash_calc_btn: 'Calculate Hashes',
+    hash_input_label: 'Content to Hash',
+    hash_copy_success: 'Hash copied!',
 
     url_placeholder: 'Paste full URL here (e.g., https://...)',
     url_protocol: 'Protocol',
@@ -369,6 +373,8 @@ export const translations = {
     hash_placeholder: 'Entrez le texte pour générer le hachage...',
     hash_uppercase: 'Sortie en Majuscules',
     hash_calc_btn: 'Calculer les Hachages',
+    hash_input_label: 'Contenu à hacher',
+    hash_copy_success: 'Hachage copié !',
 
     url_placeholder: 'Collez l\'URL complète ici (ex: https://...)',
     url_protocol: 'Protocole',

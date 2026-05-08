@@ -1,4 +1,4 @@
-import { Fingerprint, Type, LucideIcon, FileStack, Link2, Image as ImageIcon, QrCode, Terminal, Key } from 'lucide-react';
+import { Fingerprint, Type, LucideIcon, FileStack, Link2, Image as ImageIcon, QrCode, Terminal, Key, Hash } from 'lucide-react';
 import { UUIDGeneratorTool } from '@/modules/uuid/UUIDGeneratorTool';
 import { TextAnalyzerTool } from '@/modules/text/TextAnalyzerTool';
 import { PDFMergerTool } from '@/modules/pdf/PDFMergerTool';
@@ -7,6 +7,7 @@ import { ImageConverterTool } from '@/modules/image/ImageConverterTool';
 import { QRCodeTool } from '@/modules/qrcode/QRCodeTool';
 import { ChmodCalculatorTool } from '@/modules/linux/ChmodCalculatorTool';
 import { JWTDecoderTool } from '@/modules/jwt/JWTDecoderTool';
+import { HashCalculatorTool } from '@/modules/hash/HashCalculatorTool';
 
 export interface Tool {
   id: string;
@@ -72,5 +73,12 @@ export const TOOLS_REGISTRY: Tool[] = [
     description: 'Cole um token JWT para inspecionar os cabeçalhos, o payload de dados e verificar a data de expiração.',
     icon: Key,
     component: JWTDecoderTool
-  }
+  },
+  {
+  id: 'hash-calculator',
+  name: 'Calculadora de Hash',
+  description: 'Gere hashes MD5, SHA-1, SHA-256 e outros...',
+  icon: Hash,
+  component: HashCalculatorTool
+}
 ];
