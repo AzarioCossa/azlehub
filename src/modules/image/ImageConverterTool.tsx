@@ -18,8 +18,7 @@ export const ImageConverterTool: React.FC = () => {
         description="Reduza o tamanho das suas imagens ou converta formatos (JPG, PNG, WEBP) diretamente no seu navegador. 100% privado, sem limites e sem uploads para servidores."
       >
         <div className="space-y-8">
-          
-          {/* Zona de Upload / Preview */}
+
           {!file ? (
             <div className="border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-xl p-12 text-center hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors relative">
               <input 
@@ -38,8 +37,7 @@ export const ImageConverterTool: React.FC = () => {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              
-              {/* Coluna da Esquerda: Preview da Original */}
+
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
                   <h4 className="text-sm font-semibold text-slate-700 dark:text-slate-300">Imagem Original</h4>
@@ -57,17 +55,14 @@ export const ImageConverterTool: React.FC = () => {
                 </p>
               </div>
 
-              {/* Coluna da Direita: Controlos e Resultado */}
               <div className="space-y-6">
-                
-                {/* Controlos de Configuração */}
+
                 <div className="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg p-5 space-y-5">
                   <div className="flex items-center gap-2 mb-2 border-b border-slate-200 dark:border-slate-700 pb-3">
                     <Settings size={18} className="text-blue-500" />
                     <h4 className="font-medium text-slate-800 dark:text-slate-200">Configurações</h4>
                   </div>
-                  
-                  {/* Formato */}
+
                   <div>
                     <label className="text-sm font-medium text-slate-700 dark:text-slate-300 block mb-2">Formato de Saída</label>
                     <div className="flex gap-2">
@@ -87,7 +82,6 @@ export const ImageConverterTool: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Qualidade (Apenas para JPG e WEBP) */}
                   {options.format !== 'image/png' && (
                     <div>
                       <div className="flex justify-between items-center mb-2">
@@ -117,7 +111,6 @@ export const ImageConverterTool: React.FC = () => {
                   </Button>
                 </div>
 
-                {/* Resultado */}
                 {resultBlob && (
                   <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-5 text-center space-y-4 animate-in slide-in-from-bottom-4">
                     <div>
@@ -125,8 +118,7 @@ export const ImageConverterTool: React.FC = () => {
                       <p className="text-2xl font-bold text-green-600 dark:text-green-400 font-mono mt-1">
                         {formatBytes(resultBlob.size)}
                       </p>
-                      
-                      {/* Cálculo de economia */}
+
                       {file.size > resultBlob.size && (
                         <p className="text-xs text-green-600 dark:text-green-400 mt-1 bg-green-100 dark:bg-green-900/40 inline-block px-2 py-0.5 rounded-full">
                           Poupança de {Math.round((1 - (resultBlob.size / file.size)) * 100)}%

@@ -20,7 +20,7 @@ export const useImageConverter = () => {
     }
     setFile(selectedFile);
     setPreviewUrl(URL.createObjectURL(selectedFile));
-    setResultBlob(null); // Reseta o resultado anterior
+    setResultBlob(null);
   }, []);
 
   const clear = useCallback(() => {

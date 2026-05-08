@@ -4,16 +4,14 @@ export interface ConversionOptions {
 }
 
 export const ImageService = {
-  /**
-   * Converte e otimiza uma imagem usando o Canvas HTML5 nativo
-   */
+
   processImage: (file: File, options: ConversionOptions): Promise<Blob> => {
     return new Promise((resolve, reject) => {
       const img = new Image();
       const url = URL.createObjectURL(file);
 
       img.onload = () => {
-        // Criar um canvas invisível na memória
+
         const canvas = document.createElement('canvas');
         canvas.width = img.width;
         canvas.height = img.height;
@@ -24,17 +22,13 @@ export const ImageService = {
           return;
         }
 
-        // Se for converter para JPEG, preenchemos o fundo de branco 
-        // (pois JPEG não suporta transparência)
         if (options.format === 'image/jpeg') {
           ctx.fillStyle = '#FFFFFF';
           ctx.fillRect(0, 0, canvas.width, canvas.height);
         }
 
-        // Desenha a imagem original no canvas
         ctx.drawImage(img, 0, 0);
 
-        // Extrai o resultado com o novo formato e compressão
         canvas.toBlob(
           (blob) => {
             if (blob) resolve(blob);
@@ -44,7 +38,6 @@ export const ImageService = {
           options.quality
         );
 
-        // Limpa a memória
         URL.revokeObjectURL(url);
       };
 
@@ -59,7 +52,7 @@ export const ImageService = {
 
   downloadBlob: (blob: Blob, originalName: string, format: string) => {
     const extension = format.split('/')[1];
-    // Remove a extensão original e adiciona a nova
+
     const newName = originalName.replace(/\.[^/.]+$/, "") + `-otimizado.${extension}`;
     
     const url = URL.createObjectURL(blob);
