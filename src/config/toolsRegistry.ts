@@ -1,4 +1,4 @@
-import { Fingerprint, Type, LucideIcon, FileStack, Link2, Image as ImageIcon, QrCode, Terminal } from 'lucide-react';
+import { Fingerprint, Type, LucideIcon, FileStack, Link2, Image as ImageIcon, QrCode, Terminal, Key } from 'lucide-react';
 import { UUIDGeneratorTool } from '@/modules/uuid/UUIDGeneratorTool';
 import { TextAnalyzerTool } from '@/modules/text/TextAnalyzerTool';
 import { PDFMergerTool } from '@/modules/pdf/PDFMergerTool';
@@ -6,6 +6,7 @@ import { URLParserTool } from '@/modules/url/URLParserTool';
 import { ImageConverterTool } from '@/modules/image/ImageConverterTool';
 import { QRCodeTool } from '@/modules/qrcode/QRCodeTool';
 import { ChmodCalculatorTool } from '@/modules/linux/ChmodCalculatorTool';
+import { JWTDecoderTool } from '@/modules/jwt/JWTDecoderTool';
 
 export interface Tool {
   id: string;
@@ -64,5 +65,12 @@ export const TOOLS_REGISTRY: Tool[] = [
     description: 'Calculadora bidirecional de permissões Linux. Converta caixas de seleção em números octais ou comandos simbólicos.',
     icon: Terminal,
     component: ChmodCalculatorTool
+  },
+  {
+    id: 'jwt-decoder',
+    name: 'JWT Decoder',
+    description: 'Cole um token JWT para inspecionar os cabeçalhos, o payload de dados e verificar a data de expiração.',
+    icon: Key,
+    component: JWTDecoderTool
   }
 ];
