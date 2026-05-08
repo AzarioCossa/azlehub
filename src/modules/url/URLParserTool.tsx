@@ -3,32 +3,34 @@ import { Link2, Trash2, AlertCircle } from 'lucide-react';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { useURLParser } from './hooks/useURLParser';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export const URLParserTool: React.FC = () => {
+  const { t } = useLanguage();
   const { inputUrl, setInputUrl, parsedData, clear } = useURLParser();
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in duration-500">
       <Card 
-        title="URL Parser & Decoder" 
-        description="Cole uma URL complexa para decodificar, analisar os seus componentes e ler os parâmetros de pesquisa (query strings) de forma organizada."
+        title={t('tool_url-parser_name' as any)} 
+        description={t('tool_url-parser_desc' as any)}
       >
         <div className="space-y-6">
           <div>
             <div className="flex justify-between mb-2">
               <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
-                URL Completa
+                {t('url_full' as any)}
               </label>
               {inputUrl && (
                 <button onClick={clear} className="text-xs text-red-500 hover:underline flex items-center gap-1">
-                  <Trash2 size={12} /> Limpar
+                  <Trash2 size={12} /> {t('clear')}
                 </button>
               )}
             </div>
             <textarea
               value={inputUrl}
               onChange={(e) => setInputUrl(e.target.value)}
-              placeholder="https://api.exemplo.com/users?role=admin&status=active%20user..."
+              placeholder={t('url_placeholder' as any)}
               className="w-full h-24 p-4 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none resize-none font-mono text-sm break-all text-slate-900 dark:text-slate-100"
             />
           </div>
@@ -39,21 +41,21 @@ export const URLParserTool: React.FC = () => {
               {!parsedData.isValid ? (
                 <div className="flex items-center gap-2 text-red-500 bg-red-50 dark:bg-red-900/20 p-4 rounded-lg">
                   <AlertCircle size={20} />
-                  <span className="text-sm">A string inserida não parece ser uma URL válida.</span>
+                  <span className="text-sm">{t('url_invalid' as any)}</span>
                 </div>
               ) : (
                 <>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="bg-slate-50 dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
-                      <span className="text-xs text-slate-500 uppercase font-bold tracking-wider">Protocolo</span>
+                      <span className="text-xs text-slate-500 uppercase font-bold tracking-wider">{t('url_protocol')}</span>
                       <p className="font-mono mt-1 text-slate-800 dark:text-slate-200">{parsedData.protocol}</p>
                     </div>
                     <div className="bg-slate-50 dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
-                      <span className="text-xs text-slate-500 uppercase font-bold tracking-wider">Host (Domínio)</span>
+                      <span className="text-xs text-slate-500 uppercase font-bold tracking-wider">{t('url_host')}</span>
                       <p className="font-mono mt-1 text-slate-800 dark:text-slate-200">{parsedData.host}</p>
                     </div>
                     <div className="bg-slate-50 dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
-                      <span className="text-xs text-slate-500 uppercase font-bold tracking-wider">Caminho (Path)</span>
+                      <span className="text-xs text-slate-500 uppercase font-bold tracking-wider">{t('url_path')}</span>
                       <p className="font-mono mt-1 text-slate-800 dark:text-slate-200">{parsedData.pathname || '/'}</p>
                     </div>
                   </div>
@@ -61,14 +63,14 @@ export const URLParserTool: React.FC = () => {
                   {parsedData.params.length > 0 && (
                     <div className="mt-6">
                       <h4 className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-3">
-                        Parâmetros da Query ({parsedData.params.length})
+                        {t('url_params')} ({parsedData.params.length})
                       </h4>
                       <div className="border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden">
                         <table className="w-full text-sm text-left">
                           <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400">
                             <tr>
-                              <th className="px-4 py-3 font-medium border-b border-slate-200 dark:border-slate-700 w-1/3">Chave (Key)</th>
-                              <th className="px-4 py-3 font-medium border-b border-slate-200 dark:border-slate-700">Valor Decodificado (Value)</th>
+                              <th className="px-4 py-3 font-medium border-b border-slate-200 dark:border-slate-700 w-1/3">{t('url_param_key' as any)}</th>
+                              <th className="px-4 py-3 font-medium border-b border-slate-200 dark:border-slate-700">{t('url_param_value' as any)}</th>
                             </tr>
                           </thead>
                           <tbody>

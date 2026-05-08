@@ -18,7 +18,7 @@ export interface Tool {
 
 export const TOOLS_REGISTRY: Tool[] = [
   {
-    id: 'uuid-gen',
+    id: 'uuid-generator',
     name: 'Gerador de UUID',
     description: 'Crie identificadores únicos universais (v4) instantaneamente.',
     icon: Fingerprint,

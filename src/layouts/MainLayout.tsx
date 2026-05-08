@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Terminal, LayoutDashboard, Moon, Sun, Menu, X, Github } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { TOOLS_REGISTRY } from '@/config/toolsRegistry';
+import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { useLanguage } from '@/contexts/LanguageContext'; // <-- 1. Importação do Hook
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -10,10 +12,11 @@ interface MainLayoutProps {
 }
 
 export const MainLayout: React.FC<MainLayoutProps> = ({ children, activeToolId, onNavigate }) => {
+  const { t } = useLanguage(); // <-- 2. Inicialização da tradução
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  // Lógica de Tema Escuro
   useEffect(() => {
     if (isDarkMode) document.documentElement.classList.add('dark');
     else document.documentElement.classList.remove('dark');
@@ -25,7 +28,9 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, activeToolId, 
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const activeToolName = activeToolId ? TOOLS_REGISTRY.find(t => t.id === activeToolId)?.name : null;
+  // 3. Tradução do nome da ferramenta ativa no cabeçalho
+  const baseActiveTool = activeToolId ? TOOLS_REGISTRY.find(t => t.id === activeToolId) : null;
+  const activeToolName = baseActiveTool ? (t(`tool_${baseActiveTool.id}_name` as any) || baseActiveTool.name) : null;
 
   return (
     <div className={`min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-300 font-sans flex ${isDarkMode ? 'dark' : ''}`}>
@@ -50,11 +55,11 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, activeToolId, 
             )}
           >
             <LayoutDashboard size={18} />
-            Dashboard
+            {t('dashboard')} {/* <-- 4. Tradução do Dashboard */}
           </button>
 
           <div className="pt-4 pb-2 px-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">
-            Ferramentas
+            {t('tools')} {/* <-- 5. Tradução da categoria Ferramentas */}
           </div>
 
           {TOOLS_REGISTRY.map(tool => (
@@ -69,7 +74,8 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, activeToolId, 
               )}
             >
               <tool.icon size={18} />
-              {tool.name}
+              {/* 6. Tradução dinâmica do nome de cada ferramenta no menu lateral */}
+              {t(`tool_${tool.id}_name` as any) || tool.name} 
             </button>
           ))}
         </nav>
@@ -82,7 +88,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, activeToolId, 
         </div>
       </aside>
 
-      {/* Mobile Header */}
+      {/* Mobile Header (Sem alterações) */}
       <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 z-40 flex items-center justify-between px-4">
         <div className="flex items-center gap-2" onClick={() => handleNav(null)}>
           <div className="bg-blue-600 text-white p-1.5 rounded-lg">
@@ -100,7 +106,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, activeToolId, 
         <header className="flex justify-between items-center mb-8">
           <div className="flex items-center text-sm text-slate-500 dark:text-slate-400">
             <span onClick={() => handleNav(null)} className="cursor-pointer hover:text-blue-600 hover:underline">
-              Hub
+              {t('hub')} {/* <-- 7. Tradução do "Hub" no breadcrumb */}
             </span>
             {activeToolName && (
               <>
@@ -110,12 +116,16 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, activeToolId, 
             )}
           </div>
           
-          <button 
-            onClick={() => setIsDarkMode(!isDarkMode)}
-            className="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors"
-          >
-            {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
+          <div className="flex items-center gap-2">
+            <LanguageSwitcher />
+
+            <button 
+              onClick={() => setIsDarkMode(!isDarkMode)}
+              className="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors"
+            >
+              {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
+          </div>
         </header>
 
         {children}

@@ -3,8 +3,10 @@ import { Terminal, Copy, Check, Shield } from 'lucide-react';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { useChmodCalculator } from './hooks/useChmodCalculator';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export const ChmodCalculatorTool: React.FC = () => {
+  const { t } = useLanguage();
   const { state, octalInput, symbolic, togglePermission, handleOctalChange, copyCommand } = useChmodCalculator();
   const [copied, setCopied] = useState(false);
 
@@ -15,22 +17,22 @@ export const ChmodCalculatorTool: React.FC = () => {
   };
 
   const entities = [
-    { id: 'owner', label: 'Owner (User)', color: 'text-blue-600 dark:text-blue-400' },
-    { id: 'group', label: 'Group', color: 'text-emerald-600 dark:text-emerald-400' },
-    { id: 'public', label: 'Public (Others)', color: 'text-purple-600 dark:text-purple-400' }
+    { id: 'owner', label: t('chmod_owner' as any), color: 'text-blue-600 dark:text-blue-400' },
+    { id: 'group', label: t('chmod_group' as any), color: 'text-emerald-600 dark:text-emerald-400' },
+    { id: 'public', label: t('chmod_public' as any), color: 'text-purple-600 dark:text-purple-400' }
   ] as const;
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in duration-500">
       <Card 
-        title="Linux Chmod Calculator" 
-        description="Gere e decifre permissões de ficheiros Linux. Altere as caixas para ver o comando gerado, ou digite o número octal para ver as permissões correspondentes."
+        title={t('tool_chmod-calculator_name' as any)} 
+        description={t('tool_chmod-calculator_desc' as any)}
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
           <div className="space-y-6">
             <h4 className="font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-2">
-              <Shield size={18}/> Matriz de Permissões
+              <Shield size={18}/> {t('chmod_matrix' as any)}
             </h4>
             
             <div className="grid grid-cols-3 gap-4">
@@ -44,12 +46,12 @@ export const ChmodCalculatorTool: React.FC = () => {
                     <label key={perm} className="flex items-center gap-2 cursor-pointer group">
                       <input 
                         type="checkbox"
-                        checked={state[entity.id][perm]}
-                        onChange={() => togglePermission(entity.id, perm)}
+                        checked={state[entity.id as keyof typeof state][perm]}
+                        onChange={() => togglePermission(entity.id as any, perm)}
                         className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
                       />
                       <span className="text-sm font-medium text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-200 transition-colors capitalize">
-                        {perm} <span className="text-xs text-slate-400">({perm === 'read' ? 'r' : perm === 'write' ? 'w' : 'x'})</span>
+                        {t(`chmod_${perm}` as any)} <span className="text-xs text-slate-400">({perm === 'read' ? 'r' : perm === 'write' ? 'w' : 'x'})</span>
                       </span>
                     </label>
                   ))}
@@ -62,7 +64,7 @@ export const ChmodCalculatorTool: React.FC = () => {
 
             <div>
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                Número Octal
+                {t('chmod_octal' as any)}
               </label>
               <input 
                 type="text" 
@@ -71,17 +73,17 @@ export const ChmodCalculatorTool: React.FC = () => {
                 maxLength={3}
                 className="w-full text-4xl font-mono p-4 text-center bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-slate-900 dark:text-slate-100 tracking-[0.5em]"
               />
-              <p className="text-xs text-center text-slate-500 mt-2">Digite 3 dígitos (0-7) para testar.</p>
+              <p className="text-xs text-center text-slate-500 mt-2">{t('chmod_octal_hint' as any)}</p>
             </div>
 
             <div className="bg-slate-50 dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800 flex justify-between items-center">
-              <span className="text-sm font-semibold text-slate-500 uppercase tracking-wider">Simbólico</span>
+              <span className="text-sm font-semibold text-slate-500 uppercase tracking-wider">{t('chmod_symbolic' as any)}</span>
               <span className="text-lg font-mono font-bold text-slate-800 dark:text-slate-200">{symbolic}</span>
             </div>
 
             <div className="pt-4">
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 flex items-center gap-2">
-                <Terminal size={16}/> Comando Prático
+                <Terminal size={16}/> {t('chmod_command' as any)}
               </label>
               <div className="flex relative">
                 <code className="flex-1 bg-slate-800 text-green-400 p-4 rounded-l-lg font-mono text-sm border border-slate-700">
@@ -92,7 +94,7 @@ export const ChmodCalculatorTool: React.FC = () => {
                   className="rounded-l-none"
                   icon={copied ? Check : Copy}
                 >
-                  {copied ? 'Copiado!' : 'Copiar'}
+                  {copied ? t('copied') : t('copy')}
                 </Button>
               </div>
             </div>

@@ -3,13 +3,18 @@ import { RefreshCw, Copy, Check } from 'lucide-react';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { useUUIDGenerator } from './hooks/useUUIDGenerator';
+import { useLanguage } from '@/contexts/LanguageContext'; // <-- Importação do Hook
 
 export const UUIDGeneratorTool: React.FC = () => {
+  const { t } = useLanguage(); // <-- Inicialização do Hook
   const { uuid, history, generate, copyToClipboard, copied } = useUUIDGenerator();
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <Card title="Gerador de Identificador Único" description="Gera UUIDs versão 4 compatíveis com RFC 4122.">
+      <Card 
+        title={t('tool_uuid-generator_name' as any)} 
+        description={t('tool_uuid-generator_desc' as any)}
+      >
         <div className="flex flex-col sm:flex-row gap-4 items-center mb-6">
           <div className="relative w-full">
             <input 
@@ -19,18 +24,20 @@ export const UUIDGeneratorTool: React.FC = () => {
             />
             <div className="absolute right-2 top-2">
               <Button variant="ghost" onClick={copyToClipboard} className="h-8 w-8 p-0">
-                 {copied ? <Check className="text-green-500" size={16} /> : <Copy size={16} />}
+                  {copied ? <Check className="text-green-500" size={16} /> : <Copy size={16} />}
               </Button>
             </div>
           </div>
           <Button onClick={generate} icon={RefreshCw} className="w-full sm:w-auto whitespace-nowrap">
-            Gerar Novo
+            {t('uuid_generate_btn' as any)}
           </Button>
         </div>
 
         {history.length > 0 && (
           <div className="mt-6 pt-6 border-t border-slate-100 dark:border-slate-700">
-            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Recentes</p>
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">
+              {t('uuid_recent' as any)}
+            </p>
             <div className="flex flex-wrap gap-2">
               {history.map((h, i) => (
                 <span 
