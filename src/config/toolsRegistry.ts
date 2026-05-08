@@ -1,9 +1,10 @@
-import { Fingerprint, Type, LucideIcon, FileStack, Link2, Image as ImageIcon } from 'lucide-react';
+import { Fingerprint, Type, LucideIcon, FileStack, Link2, Image as ImageIcon, QrCode } from 'lucide-react';
 import { UUIDGeneratorTool } from '@/modules/uuid/UUIDGeneratorTool';
 import { TextAnalyzerTool } from '@/modules/text/TextAnalyzerTool';
 import { PDFMergerTool } from '@/modules/pdf/PDFMergerTool';
 import { URLParserTool } from '@/modules/url/URLParserTool';
 import { ImageConverterTool } from '@/modules/image/ImageConverterTool';
+import { QRCodeTool } from '@/modules/qrcode/QRCodeTool';
 
 export interface Tool {
   id: string;
@@ -48,5 +49,12 @@ export const TOOLS_REGISTRY: Tool[] = [
     description: 'Comprima fotos ou converta formatos (WEBP/PNG/JPG) com privacidade total e sem limites de uso.',
     icon: ImageIcon,
     component: ImageConverterTool
+  },
+  {
+    id: 'qrcode-generator',
+    name: 'QR Code Studio',
+    description: 'Crie QR Codes dinâmicos para Links, Wi-Fi e Cartões de Visita. Exporte em vetor (SVG) sem perdas.',
+    icon: QrCode,
+    component: QRCodeTool
   }
 ];
