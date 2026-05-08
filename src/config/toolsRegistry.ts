@@ -1,10 +1,11 @@
-import { Fingerprint, Type, LucideIcon, FileStack, Link2, Image as ImageIcon, QrCode } from 'lucide-react';
+import { Fingerprint, Type, LucideIcon, FileStack, Link2, Image as ImageIcon, QrCode, Terminal } from 'lucide-react';
 import { UUIDGeneratorTool } from '@/modules/uuid/UUIDGeneratorTool';
 import { TextAnalyzerTool } from '@/modules/text/TextAnalyzerTool';
 import { PDFMergerTool } from '@/modules/pdf/PDFMergerTool';
 import { URLParserTool } from '@/modules/url/URLParserTool';
 import { ImageConverterTool } from '@/modules/image/ImageConverterTool';
 import { QRCodeTool } from '@/modules/qrcode/QRCodeTool';
+import { ChmodCalculatorTool } from '@/modules/linux/ChmodCalculatorTool';
 
 export interface Tool {
   id: string;
@@ -56,5 +57,12 @@ export const TOOLS_REGISTRY: Tool[] = [
     description: 'Crie QR Codes dinâmicos para Links, Wi-Fi e Cartões de Visita. Exporte em vetor (SVG) sem perdas.',
     icon: QrCode,
     component: QRCodeTool
+  },
+  {
+    id: 'chmod-calculator',
+    name: 'Chmod Calculator',
+    description: 'Calculadora bidirecional de permissões Linux. Converta caixas de seleção em números octais ou comandos simbólicos.',
+    icon: Terminal,
+    component: ChmodCalculatorTool
   }
 ];
