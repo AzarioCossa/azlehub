@@ -1,7 +1,8 @@
-import { Fingerprint, Type, LucideIcon, FileStack } from 'lucide-react';
+import { Fingerprint, Type, LucideIcon, FileStack, Link2 } from 'lucide-react';
 import { UUIDGeneratorTool } from '@/modules/uuid/UUIDGeneratorTool';
 import { TextAnalyzerTool } from '@/modules/text/TextAnalyzerTool';
 import { PDFMergerTool } from '@/modules/pdf/PDFMergerTool';
+import { URLParserTool } from '@/modules/url/URLParserTool';
 
 export interface Tool {
   id: string;
@@ -32,5 +33,12 @@ export const TOOLS_REGISTRY: Tool[] = [
     description: 'Junte múltiplos ficheiros PDF num só localmente, sem enviar para servidores.',
     icon: FileStack,
     component: PDFMergerTool
+  },
+  {
+    id: 'url-parser',
+    name: 'URL Parser',
+    description: 'Decodifique URLs complexas e analise os seus parâmetros (query strings) de forma legível.',
+    icon: Link2,
+    component: URLParserTool
   }
 ];
