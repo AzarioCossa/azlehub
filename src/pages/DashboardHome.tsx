@@ -33,7 +33,6 @@ export const DashboardHome: React.FC<DashboardProps> = ({ onNavigate }) => {
         </p>
       </div>
 
-      {/* Barra de Pesquisa */}
       <div className="relative max-w-xl mx-auto group mb-12">
         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors group-focus-within:text-blue-600 dark:group-focus-within:text-blue-500 text-slate-400">
           <Search className="h-5 w-5" />
@@ -55,7 +54,6 @@ export const DashboardHome: React.FC<DashboardProps> = ({ onNavigate }) => {
         )}
       </div>
 
-      {/* Grelha de Ferramentas ou Estado Vazio */}
       {filteredTools.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredTools.map((tool) => (
@@ -64,7 +62,7 @@ export const DashboardHome: React.FC<DashboardProps> = ({ onNavigate }) => {
               onClick={() => onNavigate(tool.id)}
               className="group cursor-pointer bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-6 hover:shadow-xl hover:border-blue-200 dark:hover:border-blue-900 transition-all duration-300 relative overflow-hidden flex flex-col"
             >
-              {/* Ícone de fundo gigante (Watermark) */}
+
               <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transform group-hover:scale-125 transition-all duration-500 pointer-events-none">
                 <tool.icon size={100} className="text-slate-900 dark:text-white" />
               </div>
@@ -87,7 +85,7 @@ export const DashboardHome: React.FC<DashboardProps> = ({ onNavigate }) => {
           ))}
         </div>
       ) : (
-        /* Empty State */
+
         <div className="text-center py-16 animate-in zoom-in-95 duration-300">
           <div className="bg-slate-50 dark:bg-slate-800/50 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4 border border-slate-200 dark:border-slate-700">
             <Wrench className="h-10 w-10 text-slate-400 dark:text-slate-500" />
@@ -109,3 +107,6 @@ export const DashboardHome: React.FC<DashboardProps> = ({ onNavigate }) => {
     </div>
   );
 };
+
+
+export default DashboardHome;
