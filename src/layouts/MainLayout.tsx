@@ -34,7 +34,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, activeToolId, 
 
   return (
     <div className={`min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-300 font-sans flex ${isDarkMode ? 'dark' : ''}`}>
-      
+
       {/* Sidebar Desktop */}
       <aside className="hidden md:flex w-64 flex-col border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 fixed inset-y-0 z-50">
         <div className="p-6 flex items-center gap-2 border-b border-slate-100 dark:border-slate-800">
@@ -49,8 +49,8 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, activeToolId, 
             onClick={() => handleNav(null)}
             className={cn(
               "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors",
-              activeToolId === null 
-                ? "bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400" 
+              activeToolId === null
+                ? "bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400"
                 : "text-slate-600 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-800"
             )}
           >
@@ -69,21 +69,21 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, activeToolId, 
               className={cn(
                 "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors",
                 activeToolId === tool.id
-                  ? "bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400" 
+                  ? "bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400"
                   : "text-slate-600 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-800"
               )}
             >
               <tool.icon size={18} />
               {/* 6. Tradução dinâmica do nome de cada ferramenta no menu lateral */}
-              {t(`tool_${tool.id}_name` as any) || tool.name} 
+              {t(`tool_${tool.id}_name` as any) || tool.name}
             </button>
           ))}
         </nav>
-        
+
         <div className="p-4 border-t border-slate-100 dark:border-slate-800">
           <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-4 flex justify-between items-center">
-             <span className="text-xs text-slate-500">v1.0.0</span>
-             <Github size={16} className="text-slate-400" />
+            <span className="text-xs text-slate-500">v1.0.0</span>
+            <a href="https://github.com/AzarioCossa/AzleHub"><Github size={16} className="text-slate-40</a>0" /></a>
           </div>
         </div>
       </aside>
@@ -115,11 +115,11 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, activeToolId, 
               </>
             )}
           </div>
-          
+
           <div className="flex items-center gap-2">
             <LanguageSwitcher />
 
-            <button 
+            <button
               onClick={() => setIsDarkMode(!isDarkMode)}
               className="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors"
             >
